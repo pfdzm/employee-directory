@@ -6,7 +6,7 @@ export default class Employee extends Component {
     return (
       <div className="mb-3">
         <div>
-          <img src={picture.thumbnail} alt="thumbnail" />
+          <img src={picture.medium} alt="thumbnail" />
           <span className="font-weight-bold">{name.last}</span>, {name.first}
         </div>
         <div>{email}</div>
