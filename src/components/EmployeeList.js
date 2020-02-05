@@ -19,8 +19,8 @@ export default class EmployeeList extends Employee {
     return this.props.data
       .slice(0, 10)
       .sort(this.sortByLastNameAsc)
-      .map(employee => {
-        return <Employee {...employee} />;
+      .map((employee, index) => {
+        return <Employee key={index} {...employee} />;
       });
   }
 }
