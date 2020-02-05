@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 
 import Employee from "./Employee";
 
-export default class EmployeeList extends Employee {
+export default class EmployeeList extends Component {
   sortByLastNameAsc = (a, b) => {
     const nameA = a.name.last.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.last.toUpperCase(); // ignore upper and lowercase
