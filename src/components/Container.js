@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import Searchbox from "./Searchbox";
-import Employee from "./Employee";
+import EmployeeList from "./EmployeeList";
 
 // import some randomly generated user data from https://randomuser.me/
-import { results } from "../users.json";
+import { results as data } from "../users.json";
 
 export default class Container extends Component {
   state = {
-    search: "",
-    data: results
+    searchTerm: "",
+    data
   };
 
   handleInputChange = event => {
@@ -27,13 +27,9 @@ export default class Container extends Component {
         <Searchbox
           inputHandler={this.handleInputChange}
           placeholder={"Type to search for an employee"}
-          searchTerm={this.state.search}
+          searchTerm={this.state.searchTerm}
         />
-        {results
-          //   .filter(user => user.email.includes("pab"))
-          .map(user => {
-            return <Employee data={user} />;
-          })}
+        <EmployeeList data={this.state.data} />
       </div>
     );
   }

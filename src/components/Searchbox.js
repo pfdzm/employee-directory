@@ -6,7 +6,7 @@ class Searchbox extends Component {
       <div className="input-group mb-3 col-lg-6 mx-auto">
         <input
           value={this.props.searchTerm}
-          name="search"
+          name="searchTerm"
           onChange={this.props.inputHandler}
           type="text"
           placeholder={this.props.placeholder}
