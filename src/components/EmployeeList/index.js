@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Employee from "./Employee";
+import Employee from "../Employee";
 
 export default class EmployeeList extends Component {
   sortByLastNameAsc = (a, b) => {
