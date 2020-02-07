@@ -3,16 +3,14 @@ import React, { Component } from "react";
 class Searchbox extends Component {
   render() {
     return (
-      <div className="md:flex bg-white rounded-lg my-1 mx-auto lg:w-1/2 w-full border-solid border-1 border-gray-200">
-        <input
-          value={this.props.searchTerm}
-          name="searchTerm"
-          onChange={this.props.inputHandler}
-          type="text"
-          placeholder={this.props.placeholder}
-          className="w-full"
-        />
-      </div>
+      <input
+        value={this.props.searchTerm}
+        name="searchTerm"
+        onChange={this.props.inputHandler}
+        type="text"
+        placeholder={this.props.placeholder}
+        className="my-5 mx-auto bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block lg:w-3/4 appearance-none leading-normal"
+      />
     );
   }
 }
