@@ -35,7 +35,7 @@ export default class Container extends Component {
     });
   };
 
-  handlePrevPage = event => {
+  handlePrevPage = () => {
     if (this.state.currentPage > 0) {
       this.setState({
         currentPage: this.state.currentPage - 1
@@ -43,7 +43,7 @@ export default class Container extends Component {
     }
   };
 
-  handleNextPage = event => {
+  handleNextPage = () => {
     if (this.state.currentPage < this.state.pages - 1) {
       this.setState({
         currentPage: this.state.currentPage + 1
@@ -56,27 +56,42 @@ export default class Container extends Component {
     let { name, value } = event.target;
 
     if (name === "searchTerm") {
-      this.setState({
-        searchTerm: value,
-        filteredData: this.state.data.filter(({ name, email, location }) => {
-          const searchStr = String(
-            name.first + name.last + email + location.country
-          ).toLowerCase();
-          return searchStr.includes(value.toLowerCase());
-        })
-      });
+      this.setState(
+        {
+          searchTerm: value,
+          filteredData: this.state.data.filter(({ name, email, location }) => {
+            const searchStr = String(
+              name.first + name.last + email + location.country
+            ).toLowerCase();
+            return searchStr.includes(value.toLowerCase());
+          })
+        },
+        () => {
+          this.setState({
+            currentPage: 0,
+            pages: Math.ceil(
+              this.state.filteredData.length / this.state.resultsPerPage
+            )
+          });
+        }
+      );
     }
 
     if (name === "resultsPerPage") {
-      this.setState({
-        resultsPerPage: parseInt(value)
-      });
+      this.setState(
+        {
+          resultsPerPage: parseInt(value)
+        },
+        () => {
+          this.setState({
+            currentPage: 0,
+            pages: Math.ceil(
+              this.state.filteredData.length / this.state.resultsPerPage
+            )
+          });
+        }
+      );
     }
-    // Updating the input's state
-    this.setState({
-      currentPage: 0,
-      pages: Math.ceil(this.state.filteredData.length / value)
-    });
   };
 
   render() {
