@@ -1,6 +1,8 @@
 import React from "react";
 import EmployeeRow from "./EmployeeRow";
 import TableSearch from "./TableSearch";
+import HeaderRow from "./HeaderRow";
+import FooterRow from "./FooterRow";
 
 export default function EmployeeTable({
   inputHandler,
@@ -25,27 +27,7 @@ export default function EmployeeTable({
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="min-w-full leading-normal">
               <thead>
-                <tr>
-                  <th
-                    className={
-                      sortBy === "Name"
-                        ? "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider"
-                        : "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                    }
-                    onClick={sortData}
-                  >
-                    Name
-                  </th>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Country
-                  </th>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Created date
-                  </th>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Email
-                  </th>
-                </tr>
+                <HeaderRow sortBy={sortBy} sortData={sortData} />
               </thead>
               <tbody>
                 {data.map((employee, index) => (
@@ -53,26 +35,13 @@ export default function EmployeeTable({
                 ))}
               </tbody>
             </table>
-            <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-              <span className="text-xs xs:text-sm text-gray-900">
-                Showing {currentIndex + 1} to {currentIndex + resultsPerPage} of{" "}
-                {results}
-              </span>
-              <div className="inline-flex mt-2 xs:mt-0">
-                <button
-                  className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
-                  onClick={handlePrevPage}
-                >
-                  Prev
-                </button>
-                <button
-                  className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
-                  onClick={handleNextPage}
-                >
-                  Next
-                </button>
-              </div>
-            </div>
+            <FooterRow
+              results={results}
+              currentIndex={currentIndex}
+              resultsPerPage={resultsPerPage}
+              handlePrevPage={handlePrevPage}
+              handleNextPage={handleNextPage}
+            />
           </div>
         </div>
       </div>
