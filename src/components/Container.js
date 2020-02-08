@@ -31,7 +31,7 @@ export default class Container extends Component {
   sortData = event => {
     this.setState({
       sortBy: event.target.textContent,
-      data: this.state.data.sort(sortByLastNameAsc)
+      filteredData: this.state.filteredData.sort(sortByLastNameAsc)
     });
   };
 
@@ -58,9 +58,9 @@ export default class Container extends Component {
     if (name === "searchTerm") {
       this.setState({
         searchTerm: value,
-        filteredData: this.state.data.filter(({ name, email }) => {
+        filteredData: this.state.data.filter(({ name, email, location }) => {
           const searchStr = String(
-            name.first + name.last + email
+            name.first + name.last + email + location.country
           ).toLowerCase();
           return searchStr.includes(value.toLowerCase());
         })
