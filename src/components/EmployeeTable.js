@@ -2,7 +2,18 @@ import React from "react";
 import EmployeeRow from "./EmployeeRow";
 import TableSearch from "./TableSearch";
 
-export default function EmployeeTable({ inputHandler, searchTerm, data }) {
+export default function EmployeeTable({
+  inputHandler,
+  searchTerm,
+  data,
+  results,
+  currentIndex,
+  resultsPerPage,
+  handlePrevPage,
+  handleNextPage,
+  sortData,
+  sortBy
+}) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -15,14 +26,21 @@ export default function EmployeeTable({ inputHandler, searchTerm, data }) {
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
-                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th
+                    className={
+                      sortBy === "Name"
+                        ? "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider"
+                        : "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                    }
+                    onClick={sortData}
+                  >
                     Name
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Team
+                    Username
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Created at
+                    Created date
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Email
@@ -37,13 +55,20 @@ export default function EmployeeTable({ inputHandler, searchTerm, data }) {
             </table>
             <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
               <span className="text-xs xs:text-sm text-gray-900">
-                Showing 1 to 4 of 50 Entries
+                Showing {currentIndex + 1} to {currentIndex + resultsPerPage} of{" "}
+                {results}
               </span>
               <div className="inline-flex mt-2 xs:mt-0">
-                <button className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
+                <button
+                  className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
+                  onClick={handlePrevPage}
+                >
                   Prev
                 </button>
-                <button className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
+                <button
+                  className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
+                  onClick={handleNextPage}
+                >
                   Next
                 </button>
               </div>

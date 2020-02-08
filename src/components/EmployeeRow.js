@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 export default function EmployeeRow({
   name,
@@ -29,7 +30,9 @@ export default function EmployeeRow({
         <p className="text-gray-900 whitespace-no-wrap">{login.username}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{registered.date}</p>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {moment(registered.date).fromNow()}
+        </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
