@@ -15,8 +15,12 @@ export default function FooterRow({
         {results}
       </span>
       <div className="inline-flex mt-2 xs:mt-0">
-        <Button handleClick={handlePrevPage}>Prev</Button>
-        <Button handleClick={handleNextPage}>Next</Button>
+        <Button handleClick={handlePrevPage} className={"rounded-l"}>
+          Prev
+        </Button>
+        <Button handleClick={handleNextPage} className={"rounded-r"}>
+          Next
+        </Button>
       </div>
     </div>
   );

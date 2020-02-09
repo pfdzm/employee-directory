@@ -22,7 +22,11 @@ export default function EmployeeTable({
         <div>
           <h2 className="text-2xl font-semibold leading-tight">Users</h2>
         </div>
-        <TableSearch inputHandler={inputHandler} searchTerm={searchTerm} />
+        <TableSearch
+          inputHandler={inputHandler}
+          searchTerm={searchTerm}
+          resultsPerPage={resultsPerPage}
+        />
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="min-w-full leading-normal">
