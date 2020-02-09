@@ -1,38 +1,97 @@
 import React, { Component } from "react";
 import EmployeeTable from "./EmployeeTable";
-
-// import some randomly generated user data from https://randomuser.me/
-import { results as data } from "../users.json";
-
-const sortByLastNameAsc = (a, b) => {
-  const nameA = a.name.last.toUpperCase(); // ignore upper and lowercase
-  const nameB = b.name.last.toUpperCase(); // ignore upper and lowercase
-  if (nameA < nameB) {
-    return -1;
-  }
-  if (nameA > nameB) {
-    return 1;
-  }
-  // names must be equal
-  return 0;
-};
+import {
+  sortByLastNameAsc,
+  sortByLastNameDesc,
+  sortByCountryAsc,
+  sortByCountryDesc,
+  sortByDateAsc,
+  sortByDateDesc,
+  sortByEmailAsc,
+  sortByEmailDesc
+} from "../utils/sort";
 
 export default class Container extends Component {
   state = {
     searchTerm: "",
-    data,
-    filteredData: data,
+    filteredData: this.props.data,
     resultsPerPage: 5,
-    pages: data.length / 5,
+    pages: this.props.data.length / 5,
     currentPage: 0,
-    sortBy: ""
+    sortBy: "",
+    sortType: ""
   };
 
   sortData = event => {
-    this.setState({
-      sortBy: event.target.textContent,
-      filteredData: this.state.filteredData.sort(sortByLastNameAsc)
-    });
+    const { textContent } = event.target;
+    console.log(textContent);
+
+    switch (textContent) {
+      case "Name":
+        if (this.state.sortType === "asc") {
+          this.setState({
+            sortBy: textContent,
+            sortType: "desc",
+            filteredData: this.state.filteredData.sort(sortByLastNameDesc)
+          });
+        } else {
+          this.setState({
+            sortBy: textContent,
+            sortType: "asc",
+            filteredData: this.state.filteredData.sort(sortByLastNameAsc)
+          });
+        }
+        break;
+      case "Country":
+        if (this.state.sortType === "asc") {
+          this.setState({
+            sortType: "desc",
+            sortBy: event.target.textContent,
+            filteredData: this.state.filteredData.sort(sortByCountryDesc)
+          });
+        } else {
+          this.setState({
+            sortType: "asc",
+            sortBy: textContent,
+            filteredData: this.state.filteredData.sort(sortByCountryAsc)
+          });
+        }
+        break;
+      case "Created date":
+        if (this.state.sortType === "asc") {
+          this.setState({
+            sortType: "desc",
+            sortBy: event.target.textContent,
+            filteredData: this.state.filteredData.sort(sortByDateDesc)
+          });
+        } else {
+          this.setState({
+            sortType: "asc",
+            sortBy: textContent,
+            filteredData: this.state.filteredData.sort(sortByDateAsc)
+          });
+        }
+        break;
+
+      case "Email":
+        if (this.state.sortType === "asc") {
+          this.setState({
+            sortType: "desc",
+            sortBy: event.target.textContent,
+            filteredData: this.state.filteredData.sort(sortByEmailDesc)
+          });
+        } else {
+          this.setState({
+            sortType: "asc",
+            sortBy: textContent,
+            filteredData: this.state.filteredData.sort(sortByEmailAsc)
+          });
+        }
+        break;
+
+      default:
+        break;
+    }
   };
 
   handlePrevPage = () => {
@@ -59,7 +118,7 @@ export default class Container extends Component {
       this.setState(
         {
           searchTerm: value,
-          filteredData: this.state.data.filter(({ name, email, location }) => {
+          filteredData: this.props.data.filter(({ name, email, location }) => {
             const searchStr = String(
               name.first + name.last + email + location.country
             ).toLowerCase();
