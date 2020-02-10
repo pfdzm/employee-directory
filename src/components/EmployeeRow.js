@@ -21,7 +21,7 @@ export default function EmployeeRow({
           </div>
           <div className="ml-3">
             <p className="text-gray-900 whitespace-no-wrap">
-              {name.first} {name.last}
+              {name.first} <span className="font-bold">{name.last}</span>
             </p>
           </div>
         </div>
